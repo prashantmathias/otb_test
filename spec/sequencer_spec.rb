@@ -17,4 +17,11 @@ describe Sequencer do
       expect(sequencer.display).to eq ["c","b","a"]
     end
   end
+
+  context "output with dependencies" do
+    it "Accepts multiple jobs and outputs a sequence with correct positioning" do
+      sequencer = described_class.new("a => ,b => c, c => ")
+      expect(sequencer.display).to eq ["c","b","a"]
+    end
+  end
 end

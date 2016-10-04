@@ -6,12 +6,16 @@ class Sequencer
     @list = list
   end
 
-  def setOrder
+  def listSetup
     list.gsub(/[=> ]/,"").reverse.split(',')
   end
 
+  def sortedList
+    listSetup.sort {|a,b| b <=> a}
+  end
+
   def display
-    setOrder
+    sortedList.join.chars.uniq
   end
 
 end
