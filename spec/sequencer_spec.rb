@@ -20,8 +20,15 @@ describe Sequencer do
 
   context "output with dependencies" do
     it "Accepts multiple jobs and outputs a sequence with correct positioning" do
-      sequencer = described_class.new("a => ,b => c, c => ")
-      expect(sequencer.display).to eq ["c","b","a"]
+      sequencer = described_class.new("a => ,b => c, c => f, d => a, e => b, f=> ")
+      expect(sequencer.display).to eq ["f","c","b","e","a","d"]
     end
+
+    it "Raises error if jobs depend on themselves"do
+      sequencer = described_class.new("a => , b => , c => c")
+      expect{ sequencer.display }.to raise_error "Self dependencies spotted"
+    end
+
+
   end
 end
