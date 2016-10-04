@@ -15,22 +15,39 @@ class Sequencer
   end
 
   def checkSelfDependencies
-    pickDoubles.each {|x| raise "Self dependencies spotted" if match?(x)}
+    pickDoubles.each do |job|
+      raise "Self dependencies spotted" if match?(job)
+    end
+  end
+
+  def checkCircularDependencies
+    jobCombinations.each do |jobs|
+      raise "Circular dependencies spotted" if multiMatch?(jobs[0], jobs[1])
+    end
   end
 
   def display
     checkSelfDependencies
+    checkCircularDependencies
     printList
   end
 
 private
 
   def pickDoubles
-    sortedList.select {|x| x.length == 2 }
+    sortedList.select { |job| job.length == 2 }
   end
 
-  def match?(x)
-    x.chr == x.reverse.chr
+  def jobCombinations
+    pickDoubles.combination(2).to_a
+  end
+
+  def match?(arr_item)
+    arr_item.chr == arr_item.reverse.chr
+  end
+
+  def multiMatch?(item1, item2)
+    item1.chr == item2.reverse.chr
   end
 
   def printList

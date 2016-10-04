@@ -12,7 +12,7 @@ describe Sequencer do
       expect(sequencer.display).to eq ["a"]
     end
 
-    it "Can accept multiple jobs and output a sequence" do
+    it "Can accept multiple jobs and output a sequence in no significant order" do
       sequencer = described_class.new("a => , b => , c => ")
       expect(sequencer.display).to eq ["c","b","a"]
     end
@@ -20,15 +20,19 @@ describe Sequencer do
 
   context "output with dependencies" do
     it "Accepts multiple jobs and outputs a sequence with correct positioning" do
-      sequencer = described_class.new("a => ,b => c, c => f, d => a, e => b, f=> ")
+      sequencer = described_class.new("a => , b => c, c => f, d => a, e => b, f=> ")
       expect(sequencer.display).to eq ["f","c","b","e","a","d"]
     end
 
-    it "Raises error if jobs depend on themselves"do
+    it "Raises error if jobs depend on themselves" do
       sequencer = described_class.new("a => , b => , c => c")
       expect{ sequencer.display }.to raise_error "Self dependencies spotted"
     end
 
+    it "Raises error if jobs have circular dependencies" do
+      sequencer = described_class.new("a => , b => c, c => f, d => a, e => , f => b")
+      expect{ sequencer.display }.to raise_error "Circular dependencies spotted"
+    end
 
   end
 end
