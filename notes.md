@@ -25,3 +25,7 @@ setOrder("a => , b => c, c => f, d => a, e => , f => b") returns RuntimeError: C
 * Initially spiked a solution as shown above to get an idea on how to start
 * Used TDD to build a single Sequencer class to solve this problem (please see commit history:  [code](https://github.com/prashantmathias/otb_test/blob/aae38047c1c4e61b2296be12c477d7275162abbb/lib/sequencer.rb), [tests](https://github.com/prashantmathias/otb_test/blob/aae38047c1c4e61b2296be12c477d7275162abbb/spec/sequencer_spec.rb))
 * Separated into 3 different classes DependencyCheck, ListInput and ListOutput to keep it open for extension
+
+## Rspec tests
+
+[rspec](https://github.com/prashantmathias/otb_test/raw/master/images/Rspec_tests.png)
