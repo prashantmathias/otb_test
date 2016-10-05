@@ -28,4 +28,4 @@ setOrder("a => , b => c, c => f, d => a, e => , f => b") returns RuntimeError: C
 
 ## Rspec tests
 
-[rspec](https://github.com/prashantmathias/otb_test/raw/master/images/Rspec_tests.png)
+![rspec](https://github.com/prashantmathias/otb_test/raw/master/images/Rspec_tests.png)
