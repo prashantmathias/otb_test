@@ -10,8 +10,10 @@ class ListInput
 
 private
 
+  attr_reader :list
+
   def list_setup
-    @list.gsub(/[=> ]/,"").reverse.split(',')
+    list.gsub(/[=> ]/,"").reverse.split(',')
   end
 
 end
