@@ -20,8 +20,10 @@ class DependencyCheck
 
 private
 
+  attr_reader :list
+
   def pick_doubles
-    @list.sorted_list.select { |job| job.length == 2 }
+    list.sorted_list.select { |job| job.length == 2 }
   end
 
   def job_combinations
